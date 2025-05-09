@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Catálogo de Jogos 🎮</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Catálogo de Jogos 🎮</h1>
+
+    <form id="addGameForm">
+      <input type="text" id="nome" placeholder="Nome" required />
+      <input type="text" id="categoria" placeholder="Categoria" required />
+      <input type="number" id="ano" placeholder="Ano" required />
+      <button type="submit">Adicionar</button>
+    </form>
+
+    <form id="updateGameForm">
+      <input type="number" id="id_update" placeholder="ID para atualizar" required />
+      <input type="text" id="nome_update" placeholder="Novo nome" required />
+      <input type="text" id="categoria_update" placeholder="Nova categoria" required />
+      <input type="number" id="ano_update" placeholder="Novo ano" required />
+      <button type="submit">Atualizar</button>
+    </form>
+
+    <form id="deleteGameForm">
+      <input type="number" id="id_delete" placeholder="ID para deletar" required />
+      <button type="submit">Deletar</button>
+    </form>
+
+    <div id="mensagem"></div>
+    <h2>Jogos Cadastrados</h2>
+    <ul id="lista-jogos"></ul>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
