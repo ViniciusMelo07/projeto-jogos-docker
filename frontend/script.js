@@ -1,4 +1,4 @@
-const api = 'http://backend:5000';
+const api = 'http://localhost:5000';
 
 document.querySelector('#addGameForm').addEventListener('submit', async (e) => {
   e.preventDefault();

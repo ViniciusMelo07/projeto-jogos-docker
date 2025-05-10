@@ -1,7 +1,14 @@
+# Usa imagem leve com Python para rodar http.server
 FROM python:3.11-slim
 
+# Diretório de trabalho no container
 WORKDIR /app
+
+# Copia os arquivos do frontend para o container
 COPY . .
 
+# Exponha a porta que o servidor irá usar
 EXPOSE 8000
+
+# Inicia um servidor HTTP simples para servir os arquivos
 CMD ["python", "-m", "http.server", "8000"]
