@@ -1,4 +1,4 @@
-const api = 'http://3.93.213.245:5000';
+const api = 'http://3.86.160.12:5000';
 
 document.querySelector('#addGameForm').addEventListener('submit', async (e) => {
   e.preventDefault();
