@@ -1,4 +1,4 @@
-const api = 'http://3.92.196.138:5000';
+const api = 'https://qw2km1wkte.execute-api.us-east-1.amazonaws.com/prod';
 
 document.querySelector('#addGameForm').addEventListener('submit', async (e) => {
   e.preventDefault();
