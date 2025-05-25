@@ -4,21 +4,25 @@ from flask_cors import CORS
 from database import db, Game
 
 app = Flask(__name__)
-basedir = os.path.abspath(os.path.dirname(__file__))
-db_path = os.path.join(basedir, 'instance', 'games.db')
-os.makedirs(os.path.join(basedir, 'instance'), exist_ok=True)
+CORS(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_path}'
+DB_USER = 'postgres'
+DB_PASSWORD = 'vini230904'
+DB_HOST = 'jogosdb.cy5hytcq78mc.us-east-1.rds.amazonaws.com'
+DB_PORT = '5432'
+DB_NAME = 'jogosdb'
+
+# SQLAlchemy URI para PostgreSQL
+app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-os.makedirs("instance", exist_ok=True)
-
-CORS(app)
+# Inicializa o banco
 db.init_app(app)
 
 with app.app_context():
     db.create_all()
 
+# Endpoints
 @app.route('/games', methods=['GET'])
 def listar_games():
     games = Game.query.all()
@@ -57,5 +61,3 @@ def deletar_game():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
-
-
