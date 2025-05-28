@@ -8,9 +8,9 @@ CORS(app)
 
 DB_USER = 'postgres'
 DB_PASSWORD = 'vini230904'
-DB_HOST = 'jogosdb.cy5hytcq78mc.us-east-1.rds.amazonaws.com'
+DB_HOST = 'novodb.cy5hytcq78mc.us-east-1.rds.amazonaws.com'
 DB_PORT = '5432'
-DB_NAME = 'jogosdb'
+DB_NAME = 'novodb'
 
 # SQLAlchemy URI para PostgreSQL
 app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
