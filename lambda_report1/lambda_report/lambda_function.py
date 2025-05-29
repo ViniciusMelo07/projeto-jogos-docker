@@ -1,21 +1,30 @@
+import urllib.request
 import json
-import requests
 from datetime import datetime
 
 def lambda_handler(event, context):
+    cors_headers = {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type"
+    }
+
+    if event.get("httpMethod") == "OPTIONS":
+        return {
+            "statusCode": 200,
+            "headers": cors_headers,
+            "body": json.dumps({"message": "CORS preflight OK"})
+        }
+
     try:
-        api_url = "http://3.85.159.167:5000/report"
-        response = requests.get(api_url)
-        response.raise_for_status()
-        
-        data = response.json()
+        api_url = "http://SEU-IP-BACKEND:5000/report"
+        with urllib.request.urlopen(api_url) as response:
+            data = json.loads(response.read())
 
         return {
             "statusCode": 200,
-            "headers": {
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*"
-            },
+            "headers": cors_headers,
             "body": json.dumps({
                 "totalItems": len(data),
                 "lastUpdate": datetime.utcnow().isoformat() + "Z"
@@ -25,7 +34,6 @@ def lambda_handler(event, context):
     except Exception as e:
         return {
             "statusCode": 500,
-            "body": json.dumps({
-                "error": str(e)
-            })
+            "headers": cors_headers,
+            "body": json.dumps({"error": str(e)})
         }

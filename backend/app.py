@@ -2,6 +2,7 @@ import os
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from database import db, Game
+from datetime import datetime
 
 app = Flask(__name__)
 CORS(app)
@@ -12,17 +13,14 @@ DB_HOST = 'novodb.cy5hytcq78mc.us-east-1.rds.amazonaws.com'
 DB_PORT = '5432'
 DB_NAME = 'postgres'
 
-# SQLAlchemy URI para PostgreSQL
 app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-# Inicializa o banco
 db.init_app(app)
 
 with app.app_context():
     db.create_all()
 
-# Endpoints
 @app.route('/games', methods=['GET'])
 def listar_games():
     games = Game.query.all()
@@ -58,6 +56,14 @@ def deletar_game():
         db.session.commit()
         return jsonify({"mensagem": "Jogo deletado com sucesso!"})
     return jsonify({"erro": "Jogo não encontrado"}), 404
+
+@app.route('/report', methods=['GET'])
+def gerar_relatorio():
+    games = Game.query.all()
+    return jsonify({
+        "totalItems": len(games),
+        "lastUpdate": datetime.utcnow().isoformat() + "Z"
+    }), 200
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
