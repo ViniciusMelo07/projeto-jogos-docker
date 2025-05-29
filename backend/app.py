@@ -60,10 +60,7 @@ def deletar_game():
 @app.route('/report', methods=['GET'])
 def gerar_relatorio():
     games = Game.query.all()
-    return jsonify({
-        "totalItems": len(games),
-        "lastUpdate": datetime.utcnow().isoformat() + "Z"
-    }), 200
+    return jsonify([g.to_dict() for g in games]), 200
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
