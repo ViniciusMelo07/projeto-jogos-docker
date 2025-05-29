@@ -6,7 +6,7 @@ from database import db, Game
 app = Flask(__name__)
 CORS(app)
 
-DB_USER = 'postgres'
+DB_USER = 'main'
 DB_PASSWORD = 'vini230904'
 DB_HOST = 'novodb.cy5hytcq78mc.us-east-1.rds.amazonaws.com'
 DB_PORT = '5432'
