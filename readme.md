@@ -25,8 +25,8 @@ A escolha do tema foi baseada na familiaridade do grupo com aplicações web sim
 ---
 
 ## 2. Arquitetura
-
-![Diagrama](docs/arquitetura.png)
+![alt text](image.png)
+![Diagrama](docs/diagrama.jpg)
 
 | Camada   | Serviço                    | Descrição                                               |
 |----------|----------------------------|---------------------------------------------------------|
